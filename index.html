@@ -2,6 +2,20 @@
 
 <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
 
+<style>
+/* global nn */
+  
+  @keyframes bg-fade {
+    from {
+      background-color: indigo;
+    }
+    to {
+      background-color: black;
+    }
+  }
+
+</style>
+
 <script>
 /* global nn */
   
@@ -24,13 +38,18 @@
   }
   
   async function setup() {
-    nn.get('body').css({ backgroundColor: COLOR })
+    nn.get('body').css({
+      animation: 'bg-fade 0.5s infinite alternate',
+      backgroundColor: 'indigo',
+    })
     
     const gif = await nn.loadImage(GIF)
+    const rowSpacing = 20
+    const colSpacing = 20
     
-    const colSize = gif.width / 4
+    const colSize = gif.width / 4 + colSpacing
     const numCols = nn.width / colSize + 1
-    const rowSize = gif.height / 2
+    const rowSize = gif.height / 2 + rowSpacing
     const numRows = nn.height * 0.75 / rowSize
     
     for (let r = 0; r < numRows; r++) {
@@ -42,4 +61,5 @@
     }
   }
   nn.on('load', setup)
+
 </script>
